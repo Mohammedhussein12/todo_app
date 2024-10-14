@@ -20,6 +20,7 @@ class TodoApp extends StatelessWidget {
       routes: {
         HomeScreen.routeName: (context) => const HomeScreen(),
       },
+      debugShowCheckedModeBanner: false,
     );
   }
 }
