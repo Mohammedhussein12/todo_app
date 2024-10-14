@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static const Color primary = Color(0xff5D9CEC);
@@ -28,6 +29,28 @@ class AppTheme {
         side: BorderSide(width: 4, color: white),
       ),
     ),
+    textTheme: TextTheme(
+      titleLarge: GoogleFonts.poppins(
+        color: white,
+        fontWeight: FontWeight.bold,
+        fontSize: 22,
+      ),
+      titleMedium: GoogleFonts.poppins(
+        color: black,
+        fontWeight: FontWeight.bold,
+        fontSize: 18,
+      ),
+      titleSmall: GoogleFonts.poppins(
+        color: black,
+        fontWeight: FontWeight.bold,
+        fontSize: 14,
+      ),
+      headlineSmall: GoogleFonts.inter(
+        color: black,
+        fontWeight: FontWeight.w400,
+        fontSize: 20,
+      ),
+    ),
   );
   static ThemeData darkTheme = ThemeData(
     primaryColor: primary,
@@ -46,6 +69,28 @@ class AppTheme {
       backgroundColor: primary,
       shape: CircleBorder(
         side: BorderSide(width: 4, color: black),
+      ),
+    ),
+    textTheme: TextTheme(
+      titleLarge: GoogleFonts.poppins(
+        color: black,
+        fontWeight: FontWeight.bold,
+        fontSize: 22,
+      ),
+      titleMedium: GoogleFonts.poppins(
+        color: white,
+        fontWeight: FontWeight.bold,
+        fontSize: 18,
+      ),
+      titleSmall: GoogleFonts.poppins(
+        color: white,
+        fontWeight: FontWeight.bold,
+        fontSize: 14,
+      ),
+      headlineSmall: GoogleFonts.inter(
+        color: white,
+        fontWeight: FontWeight.w400,
+        fontSize: 20,
       ),
     ),
   );
