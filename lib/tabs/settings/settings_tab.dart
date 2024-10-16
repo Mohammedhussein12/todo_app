@@ -79,8 +79,9 @@ class _SettingsTabState extends State<SettingsTab> {
                   },
                 ).toList(),
                 onChanged: (selectedLanguage) {
-                  if (selectedLanguage == null) return;
-                  provider.changeLanguage(selectedLanguage.code);
+                  if (selectedLanguage != null) {
+                    provider.changeLanguage(selectedLanguage.code);
+                  }
                 },
               ),
             ),
@@ -121,9 +122,10 @@ class _SettingsTabState extends State<SettingsTab> {
                     child: Text('Dark'),
                   ),
                 ],
-                onChanged: (value) {
-                  if (value == null) return;
-                  provider.changeThemeMode(value);
+                onChanged: (themeMode) {
+                  if (themeMode != null) {
+                    provider.changeThemeMode(themeMode);
+                  }
                 },
               ),
             ),

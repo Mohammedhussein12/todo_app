@@ -5,10 +5,18 @@ class SettingsProvider extends ChangeNotifier {
   ThemeMode themeMode = ThemeMode.light;
   String languageCode = 'en';
 
+  SettingsProvider() {
+    loadSettings();
+  }
+
   void loadSettings() {
     String? themeModeType = CacheData.getData(key: 'theme');
     if (themeModeType != null) {
-      themeMode = themeModeType == 'light' ? ThemeMode.light : ThemeMode.dark;
+      if (themeModeType == 'light') {
+        themeMode = ThemeMode.light;
+      } else if (themeModeType == 'dark') {
+        themeMode = ThemeMode.dark;
+      }
     }
     languageCode = CacheData.getData(key: 'language');
     notifyListeners();
@@ -18,7 +26,8 @@ class SettingsProvider extends ChangeNotifier {
     if (themeMode == selectedThemeMode) return;
     themeMode = selectedThemeMode;
     CacheData.setData(
-        key: 'theme', value: selectedThemeMode == themeMode ? 'light' : 'dark');
+        key: 'theme',
+        value: selectedThemeMode == ThemeMode.light ? 'light' : 'dark');
     notifyListeners();
   }
 
