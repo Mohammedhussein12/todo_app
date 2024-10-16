@@ -22,6 +22,8 @@ class SettingsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  get isDark => themeMode == ThemeMode.dark;
+
   void changeThemeMode(ThemeMode selectedThemeMode) {
     if (themeMode == selectedThemeMode) return;
     themeMode = selectedThemeMode;
