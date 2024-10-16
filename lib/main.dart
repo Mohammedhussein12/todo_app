@@ -6,12 +6,12 @@ import 'package:todo_app/home_screen.dart';
 import 'package:todo_app/tabs/settings/settings_provider.dart';
 import 'package:todo_app/utils/app_theme.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  CacheData.cacheInitialization();
+  await CacheData.cacheInitialization();
   runApp(
     ChangeNotifierProvider(
-      create: (context) => SettingsProvider()..loadSettings(),
+      create: (context) => SettingsProvider(),
       child: const TodoApp(),
     ),
   );
