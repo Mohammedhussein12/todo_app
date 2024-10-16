@@ -11,11 +11,10 @@ class AppTheme {
   static const Color red = Color(0xffEC4B4B);
   static const Color green = Color(0xff61E757);
   static const Color grey = Color(0xffC8C9CB);
-  static ThemeData lightTheme = ThemeData(
+  static final ThemeData lightTheme = ThemeData(
     primaryColor: primary,
     scaffoldBackgroundColor: backgroundLight,
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: white,
       type: BottomNavigationBarType.fixed,
       selectedItemColor: primary,
       unselectedItemColor: grey,
@@ -52,7 +51,7 @@ class AppTheme {
       ),
     ),
   );
-  static ThemeData darkTheme = ThemeData(
+  static final ThemeData darkTheme = ThemeData(
     primaryColor: primary,
     scaffoldBackgroundColor: backgroundDark,
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
