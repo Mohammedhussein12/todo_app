@@ -3,8 +3,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/tabs/settings/language.dart';
 import 'package:todo_app/tabs/settings/settings_provider.dart';
+import 'package:todo_app/tabs/settings/theme_drop_down_menu_item.dart';
 
 import '../../utils/app_theme.dart';
+import 'language_drop_down_menu_button.dart';
 
 class SettingsTab extends StatefulWidget {
   const SettingsTab({super.key});
@@ -16,7 +18,7 @@ class SettingsTab extends StatefulWidget {
 class _SettingsTabState extends State<SettingsTab> {
   List<Language> languages = [
     Language(name: 'English', code: 'en'),
-    Language(name: 'Arabic', code: 'ar')
+    Language(name: 'Arabic', code: 'ar'),
   ];
 
   @override
@@ -50,42 +52,12 @@ class _SettingsTabState extends State<SettingsTab> {
               style: textTheme.titleSmall,
             ),
           ),
-          DropdownButtonHideUnderline(
-            child: Container(
-              padding: EdgeInsetsDirectional.symmetric(
-                  horizontal: screenWidth * 0.02),
-              margin: EdgeInsetsDirectional.only(
-                  top: screenHeight * 0.02,
-                  start: screenWidth * 0.05,
-                  end: screenWidth * 0.05),
-              color: AppTheme.white,
-              child: DropdownButton<Language>(
-                iconDisabledColor: AppTheme.primary,
-                iconEnabledColor: AppTheme.primary,
-                dropdownColor: AppTheme.white,
-                value: languages.firstWhere(
-                  (language) {
-                    return language.code == provider.languageCode;
-                  },
-                ),
-                style: textTheme.headlineSmall
-                    ?.copyWith(color: AppTheme.primary, fontSize: 14),
-                items: languages.map(
-                  (language) {
-                    return DropdownMenuItem(
-                      value: language,
-                      child: Text(language.name),
-                    );
-                  },
-                ).toList(),
-                onChanged: (selectedLanguage) {
-                  if (selectedLanguage != null) {
-                    provider.changeLanguage(selectedLanguage.code);
-                  }
-                },
-              ),
-            ),
-          ),
+          LanguageDropDownMenu(
+              provider: provider,
+              screenWidth: screenWidth,
+              screenHeight: screenHeight,
+              languages: languages,
+              textTheme: textTheme),
           Padding(
             padding: EdgeInsetsDirectional.only(
                 top: screenHeight * 0.02, start: screenWidth * 0.03),
@@ -94,42 +66,11 @@ class _SettingsTabState extends State<SettingsTab> {
               style: textTheme.titleSmall,
             ),
           ),
-          DropdownButtonHideUnderline(
-            child: Container(
-              padding: EdgeInsetsDirectional.symmetric(
-                  horizontal: screenWidth * 0.02),
-              margin: EdgeInsetsDirectional.only(
-                  top: screenHeight * 0.02,
-                  start: screenWidth * 0.05,
-                  end: screenWidth * 0.05),
-              color: AppTheme.white,
-              child: DropdownButton(
-                iconDisabledColor: AppTheme.primary,
-                iconEnabledColor: AppTheme.primary,
-                dropdownColor: AppTheme.white,
-                value: provider.themeMode == ThemeMode.light
-                    ? ThemeMode.light
-                    : ThemeMode.dark,
-                style: textTheme.headlineSmall
-                    ?.copyWith(color: AppTheme.primary, fontSize: 14),
-                items: const [
-                  DropdownMenuItem(
-                    value: ThemeMode.light,
-                    child: Text('Light'),
-                  ),
-                  DropdownMenuItem(
-                    value: ThemeMode.dark,
-                    child: Text('Dark'),
-                  ),
-                ],
-                onChanged: (themeMode) {
-                  if (themeMode != null) {
-                    provider.changeThemeMode(themeMode);
-                  }
-                },
-              ),
-            ),
-          )
+          ThemeModeDropDownMenu(
+              provider: provider,
+              screenWidth: screenWidth,
+              screenHeight: screenHeight,
+              textTheme: textTheme)
         ],
       ),
     );
