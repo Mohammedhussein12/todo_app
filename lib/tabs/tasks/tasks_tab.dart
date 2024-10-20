@@ -1,8 +1,11 @@
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/tabs/tasks/task_item.dart';
 
 import '../../utils/app_theme.dart';
+import '../settings/settings_provider.dart';
 
 class TasksTab extends StatelessWidget {
   const TasksTab({super.key});
@@ -10,7 +13,7 @@ class TasksTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-
+    var provider = Provider.of<SettingsProvider>(context);
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       body: Column(
@@ -27,7 +30,7 @@ class TasksTab extends StatelessWidget {
                 top: 15,
                 child: SafeArea(
                   child: Text(
-                    'ToDo List',
+                    AppLocalizations.of(context)!.to_do_list,
                     style: textTheme.titleLarge,
                   ),
                 ),
@@ -35,6 +38,7 @@ class TasksTab extends StatelessWidget {
               Padding(
                 padding: EdgeInsetsDirectional.only(top: screenHeight * 0.155),
                 child: EasyInfiniteDateTimeLine(
+                  locale: provider.languageCode,
                   dayProps: EasyDayProps(
                     height: 79,
                     width: 58,
