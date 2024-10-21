@@ -6,6 +6,7 @@ import 'package:todo_app/tabs/settings/settings_provider.dart';
 import 'package:todo_app/widgets/default_elevated_button.dart';
 import 'package:todo_app/widgets/default_text_form_field.dart';
 
+import '../../models/task_model.dart';
 import '../../utils/app_theme.dart';
 
 class AddTaskBottomSheet extends StatefulWidget {
@@ -29,8 +30,9 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
     var settingsProvider = Provider.of<SettingsProvider>(context);
 
     return Container(
+      height: MediaQuery.of(context).size.height * 0.58,
       color: settingsProvider.isDark ? AppTheme.dark : AppTheme.white,
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(20),
       child: Form(
         key: formKey,
         child: Column(
@@ -70,7 +72,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
               style: headlineSmallTextTheme,
             ),
             const SizedBox(
-              height: 10,
+              height: 8,
             ),
             InkWell(
               onTap: () async {
@@ -90,7 +92,6 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                 setState(() {});
               },
               child: Text(
-                locale: Locale(settingsProvider.languageCode),
                 style: headlineSmallTextTheme?.copyWith(fontSize: 16),
                 dateFormat.format(selectedDate),
               ),
@@ -110,6 +111,10 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
   }
 
   addTask() {
-    print('add task');
+    TaskModel task = TaskModel(
+      title: titleController.text,
+      description: descriptionController.text,
+      date: selectedDate,
+    );
   }
 }
