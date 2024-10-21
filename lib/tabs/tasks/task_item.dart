@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_app/models/task_model.dart';
 import 'package:todo_app/utils/app_theme.dart';
 
+import '../settings/settings_provider.dart';
+
 class TaskItem extends StatelessWidget {
-  const TaskItem({super.key});
+  const TaskItem({super.key, required this.task});
+
+  final TaskModel task;
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final settingsProvider = Provider.of<SettingsProvider>(context);
     return Container(
-      decoration: const BoxDecoration(
-        color: AppTheme.white,
-        borderRadius: BorderRadius.all(
+      decoration: BoxDecoration(
+        color: settingsProvider.isDark ? AppTheme.dark : AppTheme.white,
+        borderRadius: const BorderRadius.all(
           Radius.circular(15),
         ),
       ),
@@ -29,7 +36,7 @@ class TaskItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Play basket ball',
+                task.title,
                 style: textTheme.titleMedium
                     ?.copyWith(color: AppTheme.primary, fontSize: 16),
               ),
@@ -37,7 +44,7 @@ class TaskItem extends StatelessWidget {
                 height: 5,
               ),
               Text(
-                'Task Description',
+                task.description,
                 style: textTheme.titleSmall
                     ?.copyWith(fontWeight: FontWeight.w400, fontSize: 12),
               ),

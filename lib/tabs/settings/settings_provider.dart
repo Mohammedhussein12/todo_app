@@ -10,7 +10,7 @@ class SettingsProvider extends ChangeNotifier {
   }
 
   void loadSettings() {
-    String? themeModeType = CacheData.getData(key: 'theme');
+    String? themeModeType = CacheData.getData(key: 'theme') ?? 'light';
     if (themeModeType != null) {
       if (themeModeType == 'light') {
         themeMode = ThemeMode.light;
@@ -18,7 +18,7 @@ class SettingsProvider extends ChangeNotifier {
         themeMode = ThemeMode.dark;
       }
     }
-    languageCode = CacheData.getData(key: 'language');
+    languageCode = CacheData.getData(key: 'language') ?? 'en';
     notifyListeners();
   }
 

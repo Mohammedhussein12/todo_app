@@ -2,6 +2,7 @@ import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/models/task_model.dart';
 import 'package:todo_app/tabs/tasks/task_item.dart';
 
 import '../../utils/app_theme.dart';
@@ -12,6 +13,14 @@ class TasksTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<TaskModel> tasks = List.generate(
+      10,
+      (index) => TaskModel(
+        title: 'title ${index + 1}',
+        description: 'description ${index + 1}',
+        date: DateTime.now(),
+      ),
+    );
     final screenHeight = MediaQuery.of(context).size.height;
     var provider = Provider.of<SettingsProvider>(context);
     final textTheme = Theme.of(context).textTheme;
@@ -44,17 +53,23 @@ class TasksTab extends StatelessWidget {
                     width: 58,
                     inactiveDayStyle: DayStyle(
                       decoration: BoxDecoration(
-                        color: AppTheme.white,
+                        color: provider.isDark ? AppTheme.dark : AppTheme.white,
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      dayNumStyle: textTheme.titleMedium
-                          ?.copyWith(fontSize: 15, color: AppTheme.black),
-                      dayStrStyle: textTheme.titleMedium
-                          ?.copyWith(fontSize: 15, color: AppTheme.black),
+                      dayNumStyle: textTheme.titleMedium?.copyWith(
+                          fontSize: 15,
+                          color: provider.isDark
+                              ? AppTheme.white
+                              : AppTheme.black),
+                      dayStrStyle: textTheme.titleMedium?.copyWith(
+                          fontSize: 15,
+                          color: provider.isDark
+                              ? AppTheme.white
+                              : AppTheme.black),
                     ),
                     activeDayStyle: DayStyle(
                       decoration: BoxDecoration(
-                        color: AppTheme.white,
+                        color: provider.isDark ? AppTheme.dark : AppTheme.white,
                         borderRadius: BorderRadius.circular(5),
                       ),
                       dayStrStyle: textTheme.titleMedium
@@ -79,7 +94,9 @@ class TasksTab extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               padding: const EdgeInsetsDirectional.only(top: 15),
-              itemBuilder: (context, index) => const TaskItem(),
+              itemBuilder: (context, index) => TaskItem(
+                task: tasks[index],
+              ),
               itemCount: 10,
             ),
           ),

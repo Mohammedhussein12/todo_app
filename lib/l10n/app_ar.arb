@@ -4,6 +4,7 @@
   "mode": "الوضع",
   "add_new_task": "أضف مهمة جديدة",
   "edit_task": "تحرير المهمة",
+  "add": "اضافه",
   "delete": "حذف",
   "enter_your_task": "أدخل مهمتك",
   "select_date": "اختر التاريخ",
@@ -11,5 +12,7 @@
   "tasks": "المهام",
   "settings": "الإعدادات",
   "this_is_title": "هذا هو العنوان",
-  "task_details": "تفاصيل المهم"
+  "task_details": "تفاصيل المهم",
+  "enter_task_title": "أدخل عنوان المهمة",
+  "enter_task_description": "أدخل وصف المهمه"
 }
