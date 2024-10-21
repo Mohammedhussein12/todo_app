@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/utils/app_theme.dart';
+
+import '../settings/settings_provider.dart';
 
 class TaskItem extends StatelessWidget {
   const TaskItem({super.key});
@@ -7,10 +10,11 @@ class TaskItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final settingsProvider = Provider.of<SettingsProvider>(context);
     return Container(
-      decoration: const BoxDecoration(
-        color: AppTheme.white,
-        borderRadius: BorderRadius.all(
+      decoration: BoxDecoration(
+        color: settingsProvider.isDark ? AppTheme.dark : AppTheme.white,
+        borderRadius: const BorderRadius.all(
           Radius.circular(15),
         ),
       ),

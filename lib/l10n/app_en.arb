@@ -4,6 +4,7 @@
   "mode": "Mode",
   "add_new_task": "Add new Task",
   "edit_task": "Edit Task",
+  "add": "Add",
   "delete": "Delete",
   "enter_your_task": "Enter your task",
   "select_date": "Select Date",
@@ -11,5 +12,7 @@
   "tasks": "Tasks",
   "settings": "Settings",
   "this_is_title": "This is title",
-  "task_details": "Task details"
+  "task_details": "Task details",
+  "enter_task_title": "Enter task title",
+  "enter_task_description": "Enter task description"
 }

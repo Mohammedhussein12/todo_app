@@ -44,17 +44,23 @@ class TasksTab extends StatelessWidget {
                     width: 58,
                     inactiveDayStyle: DayStyle(
                       decoration: BoxDecoration(
-                        color: AppTheme.white,
+                        color: provider.isDark ? AppTheme.dark : AppTheme.white,
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      dayNumStyle: textTheme.titleMedium
-                          ?.copyWith(fontSize: 15, color: AppTheme.black),
-                      dayStrStyle: textTheme.titleMedium
-                          ?.copyWith(fontSize: 15, color: AppTheme.black),
+                      dayNumStyle: textTheme.titleMedium?.copyWith(
+                          fontSize: 15,
+                          color: provider.isDark
+                              ? AppTheme.white
+                              : AppTheme.black),
+                      dayStrStyle: textTheme.titleMedium?.copyWith(
+                          fontSize: 15,
+                          color: provider.isDark
+                              ? AppTheme.white
+                              : AppTheme.black),
                     ),
                     activeDayStyle: DayStyle(
                       decoration: BoxDecoration(
-                        color: AppTheme.white,
+                        color: provider.isDark ? AppTheme.dark : AppTheme.white,
                         borderRadius: BorderRadius.circular(5),
                       ),
                       dayStrStyle: textTheme.titleMedium
