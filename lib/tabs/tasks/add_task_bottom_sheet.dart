@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/firebase_services/firebase_services.dart';
 import 'package:todo_app/tabs/settings/settings_provider.dart';
 import 'package:todo_app/widgets/default_elevated_button.dart';
 import 'package:todo_app/widgets/default_text_form_field.dart';
@@ -63,7 +64,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                   return null;
                 },
                 hintText: AppLocalizations.of(context)!.enter_task_description,
-                controller: titleController),
+                controller: descriptionController),
             const SizedBox(
               height: 16,
             ),
@@ -116,5 +117,11 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
       description: descriptionController.text,
       date: selectedDate,
     );
+    FirebaseServices.addTaskToFireStore(task)
+        .timeout(const Duration(microseconds: 100), onTimeout: () {
+      Navigator.pop(context);
+    }).catchError((error) {
+      print(error);
+    });
   }
 }

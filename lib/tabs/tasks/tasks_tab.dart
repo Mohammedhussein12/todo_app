@@ -2,28 +2,31 @@ import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/firebase_services/firebase_services.dart';
 import 'package:todo_app/models/task_model.dart';
 import 'package:todo_app/tabs/tasks/task_item.dart';
 
 import '../../utils/app_theme.dart';
 import '../settings/settings_provider.dart';
 
-class TasksTab extends StatelessWidget {
+class TasksTab extends StatefulWidget {
   const TasksTab({super.key});
 
   @override
+  State<TasksTab> createState() => _TasksTabState();
+}
+
+class _TasksTabState extends State<TasksTab> {
+  List<TaskModel> tasks = [];
+
+  @override
   Widget build(BuildContext context) {
-    List<TaskModel> tasks = List.generate(
-      10,
-      (index) => TaskModel(
-        title: 'title ${index + 1}',
-        description: 'description ${index + 1}',
-        date: DateTime.now(),
-      ),
-    );
-    final screenHeight = MediaQuery.of(context).size.height;
+    final screenHeight = MediaQuery.sizeOf(context).height;
     var provider = Provider.of<SettingsProvider>(context);
     final textTheme = Theme.of(context).textTheme;
+    if (tasks.isEmpty) {
+      getTasks();
+    }
     return Scaffold(
       body: Column(
         children: [
@@ -97,11 +100,16 @@ class TasksTab extends StatelessWidget {
               itemBuilder: (context, index) => TaskItem(
                 task: tasks[index],
               ),
-              itemCount: 10,
+              itemCount: tasks.length,
             ),
           ),
         ],
       ),
     );
+  }
+
+  Future<void> getTasks() async {
+    tasks = await FirebaseServices.getTasksFromFireStore();
+    setState(() {});
   }
 }
