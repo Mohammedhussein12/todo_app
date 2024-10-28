@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/firebase_services/firebase_services.dart';
 import 'package:todo_app/tabs/settings/settings_provider.dart';
+import 'package:todo_app/tabs/tasks/tasks_provider.dart';
 import 'package:todo_app/widgets/default_elevated_button.dart';
 import 'package:todo_app/widgets/default_text_form_field.dart';
 
@@ -30,82 +32,93 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
     final headlineSmallTextTheme = Theme.of(context).textTheme.headlineSmall;
     var settingsProvider = Provider.of<SettingsProvider>(context);
 
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.58,
-      color: settingsProvider.isDark ? AppTheme.dark : AppTheme.white,
-      padding: const EdgeInsets.all(20),
-      child: Form(
-        key: formKey,
-        child: Column(
-          children: [
-            Text(
-              textAlign: TextAlign.center,
-              AppLocalizations.of(context)!.add_new_task,
-              style: titleMediumTextTheme,
-            ),
-            const SizedBox(height: 16),
-            DefaultTextFormField(
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Title cannot be empty';
-                  }
-                  return null;
-                },
-                hintText: AppLocalizations.of(context)!.enter_your_task,
-                controller: titleController),
-            const SizedBox(
-              height: 16,
-            ),
-            DefaultTextFormField(
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Description cannot be empty';
-                  }
-                  return null;
-                },
-                hintText: AppLocalizations.of(context)!.enter_task_description,
-                controller: descriptionController),
-            const SizedBox(
-              height: 16,
-            ),
-            Text(
-              AppLocalizations.of(context)!.select_date,
-              style: headlineSmallTextTheme,
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            InkWell(
-              onTap: () async {
-                DateTime? dateTime = await showDatePicker(
-                  locale: Locale(settingsProvider.languageCode),
-                  initialEntryMode: DatePickerEntryMode.calendarOnly,
-                  context: context,
-                  initialDate: selectedDate,
-                  firstDate: DateTime.now(),
-                  lastDate: DateTime.now().add(
-                    const Duration(days: 365),
-                  ),
-                );
-                if (dateTime != null && dateTime != selectedDate) {
-                  selectedDate = dateTime;
-                }
-                setState(() {});
-              },
-              child: Text(
-                style: headlineSmallTextTheme?.copyWith(fontSize: 16),
-                dateFormat.format(selectedDate),
+    return Padding(
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      child: Container(
+        decoration: BoxDecoration(
+          color: settingsProvider.isDark ? AppTheme.dark : AppTheme.white,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(15),
+            topRight: Radius.circular(15),
+          ),
+        ),
+        height: MediaQuery.of(context).size.height * 0.58,
+        padding: const EdgeInsets.all(20),
+        child: Form(
+          key: formKey,
+          child: Column(
+            children: [
+              Text(
+                textAlign: TextAlign.center,
+                AppLocalizations.of(context)!.add_new_task,
+                style: titleMediumTextTheme,
               ),
-            ),
-            const Spacer(),
-            DefaultElevatedButton(
-                onPressed: () {
-                  if (formKey.currentState!.validate()) {
-                    addTask();
+              const SizedBox(height: 16),
+              DefaultTextFormField(
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Title cannot be empty';
+                    }
+                    return null;
+                  },
+                  hintText: AppLocalizations.of(context)!.enter_your_task,
+                  controller: titleController),
+              const SizedBox(
+                height: 16,
+              ),
+              DefaultTextFormField(
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Description cannot be empty';
+                    }
+                    return null;
+                  },
+                  hintText:
+                      AppLocalizations.of(context)!.enter_task_description,
+                  controller: descriptionController),
+              const SizedBox(
+                height: 16,
+              ),
+              Text(
+                AppLocalizations.of(context)!.select_date,
+                style: headlineSmallTextTheme,
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              InkWell(
+                onTap: () async {
+                  DateTime? dateTime = await showDatePicker(
+                    locale: Locale(settingsProvider.languageCode),
+                    initialEntryMode: DatePickerEntryMode.calendarOnly,
+                    context: context,
+                    initialDate: selectedDate,
+                    firstDate: DateTime.now(),
+                    lastDate: DateTime.now().add(
+                      const Duration(days: 365),
+                    ),
+                  );
+                  if (dateTime != null && dateTime != selectedDate) {
+                    selectedDate = dateTime;
                   }
+                  setState(() {});
                 },
-                label: AppLocalizations.of(context)!.add),
-          ],
+                child: Text(
+                  style: headlineSmallTextTheme?.copyWith(fontSize: 16),
+                  dateFormat.format(selectedDate),
+                ),
+              ),
+              const Spacer(),
+              DefaultElevatedButton(
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      addTask();
+                    }
+                  },
+                  label: AppLocalizations.of(context)!.add),
+            ],
+          ),
         ),
       ),
     );
@@ -119,9 +132,23 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
     );
     FirebaseServices.addTaskToFireStore(task)
         .timeout(const Duration(microseconds: 100), onTimeout: () {
+      Provider.of<TasksProvider>(context, listen: false).getTasks();
       Navigator.pop(context);
+      Fluttertoast.showToast(
+        msg: "Task added successfully!",
+        toastLength: Toast.LENGTH_LONG,
+        timeInSecForIosWeb: 5,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: AppTheme.green,
+      );
     }).catchError((error) {
-      print(error);
+      Fluttertoast.showToast(
+        msg: "Oops! Something went wrong. Please try again.",
+        toastLength: Toast.LENGTH_LONG,
+        timeInSecForIosWeb: 5,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: AppTheme.red,
+      );
     });
   }
 }

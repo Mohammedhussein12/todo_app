@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_app/cache/cache_helper.dart';
 import 'package:todo_app/home_screen.dart';
 import 'package:todo_app/tabs/settings/settings_provider.dart';
+import 'package:todo_app/tabs/tasks/tasks_provider.dart';
 import 'package:todo_app/utils/app_theme.dart';
 
 void main() async {
@@ -14,8 +15,15 @@ void main() async {
   await FirebaseFirestore.instance.disableNetwork();
   await CacheData.cacheInitialization();
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => SettingsProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => SettingsProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => TasksProvider(),
+        ),
+      ],
       child: const TodoApp(),
     ),
   );

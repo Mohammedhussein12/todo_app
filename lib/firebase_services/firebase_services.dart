@@ -26,4 +26,9 @@ class FirebaseServices {
         .map((queryDocSnapshot) => queryDocSnapshot.data())
         .toList();
   }
+
+  static deleteTaskFromFireStore(String taskId) async {
+    CollectionReference<TaskModel> tasksCollection = getTasksCollection();
+    return tasksCollection.doc(taskId).delete();
+  }
 }
