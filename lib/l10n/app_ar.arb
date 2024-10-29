@@ -12,7 +12,8 @@
   "tasks": "المهام",
   "settings": "الإعدادات",
   "this_is_title": "هذا هو العنوان",
-  "task_details": "تفاصيل المهم",
+  "task_details": "تفاصيل المهمه",
   "enter_task_title": "أدخل عنوان المهمة",
-  "enter_task_description": "أدخل وصف المهمه"
+  "enter_task_description": "أدخل وصف المهمه",
+  "done": "تم!"
 }
