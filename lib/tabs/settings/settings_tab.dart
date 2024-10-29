@@ -70,7 +70,33 @@ class _SettingsTabState extends State<SettingsTab> {
               provider: provider,
               screenWidth: screenWidth,
               screenHeight: screenHeight,
-              textTheme: textTheme)
+              textTheme: textTheme),
+          const Spacer(
+            flex: 5,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Logout',
+                  style: textTheme.titleMedium,
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.logout,
+                    color: AppTheme.primary,
+                    size: 28,
+                  ),
+                )
+              ],
+            ),
+          ),
+          const Spacer(
+            flex: 3,
+          ),
         ],
       ),
     );
