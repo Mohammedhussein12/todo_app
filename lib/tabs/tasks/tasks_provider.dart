@@ -19,7 +19,7 @@ class TasksProvider extends ChangeNotifier {
         .toList();
 
     tasks.sort(
-      (TaskModel task1, TaskModel task2) => task2.date.compareTo(task1.date),
+          (TaskModel task1, TaskModel task2) => task2.date.compareTo(task1.date),
     );
     notifyListeners();
   }

@@ -3,12 +3,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/firebase_services/firebase_services.dart';
+import 'package:todo_app/helper_methods/show_toast.dart';
 import 'package:todo_app/tabs/settings/settings_provider.dart';
 import 'package:todo_app/tabs/tasks/tasks_provider.dart';
 import 'package:todo_app/widgets/default_elevated_button.dart';
 import 'package:todo_app/widgets/default_text_form_field.dart';
 
-import '../../helper_methods/show_toast.dart';
 import '../../models/task_model.dart';
 import '../../utils/app_theme.dart';
 
@@ -124,21 +124,21 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
     );
   }
 
-  addTask() {
+  addTask() async {
     TaskModel task = TaskModel(
       title: titleController.text,
       description: descriptionController.text,
       date: selectedDate,
     );
-    FirebaseServices.addTaskToFireStore(task)
-        .timeout(const Duration(microseconds: 100), onTimeout: () {
+    await FirebaseServices.addTaskToFireStore(task)
+        .timeout(const Duration(milliseconds: 10), onTimeout: () {
       Provider.of<TasksProvider>(context, listen: false).getTasks();
       Navigator.pop(context);
       showToast(
-          msg: 'Task updated successfully!', backgroundColor: AppTheme.green);
+          msg: 'Task Added successfully!', backgroundColor: AppTheme.green);
     }).catchError((error) {
       showToast(
-          msg: 'oops! Something went wrong.', backgroundColor: AppTheme.red);
+          msg: 'oops! something went wrong', backgroundColor: AppTheme.red);
     });
   }
 }

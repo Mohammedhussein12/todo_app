@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/firebase_services/firebase_services.dart';
 import 'package:todo_app/models/task_model.dart';
 import 'package:todo_app/tabs/tasks/tasks_provider.dart';
 import 'package:todo_app/utils/app_theme.dart';
 
-import '../../helper_methods/show_toast.dart';
 import '../settings/settings_provider.dart';
 import 'edit_task_screen.dart';
 
@@ -44,9 +44,13 @@ class TaskItem extends StatelessWidget {
                           onTimeout: () {
                     tasksProvider.getTasks();
                   }).catchError(() {
-                    showToast(
-                        msg: 'oops! Something went wrong.',
-                        backgroundColor: AppTheme.red);
+                    Fluttertoast.showToast(
+                      msg: 'Oops! something went wrong',
+                      toastLength: Toast.LENGTH_LONG,
+                      timeInSecForIosWeb: 5,
+                      gravity: ToastGravity.BOTTOM,
+                      backgroundColor: AppTheme.red,
+                    );
                   });
                 },
               ),
@@ -112,7 +116,7 @@ class TaskItem extends StatelessWidget {
                     await FirebaseServices.updateTaskStatus(
                             task.id, task.isDone)
                         .timeout(
-                      const Duration(microseconds: 100),
+                      const Duration(milliseconds: 10),
                       onTimeout: () {
                         tasksProvider.getTasks();
                         print(task.isDone);
