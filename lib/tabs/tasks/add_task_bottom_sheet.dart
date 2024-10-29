@@ -24,13 +24,14 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
   TextEditingController descriptionController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   DateFormat dateFormat = DateFormat('yyyy-MM-dd');
-  DateTime selectedDate = DateTime.now();
+  late TasksProvider tasksProvider;
 
   @override
   Widget build(BuildContext context) {
     final titleMediumTextTheme = Theme.of(context).textTheme.titleMedium;
     final headlineSmallTextTheme = Theme.of(context).textTheme.headlineSmall;
     var settingsProvider = Provider.of<SettingsProvider>(context);
+    tasksProvider = Provider.of<TasksProvider>(context, listen: false);
 
     return Padding(
       padding:
@@ -93,20 +94,21 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                     locale: Locale(settingsProvider.languageCode),
                     initialEntryMode: DatePickerEntryMode.calendarOnly,
                     context: context,
-                    initialDate: selectedDate,
+                    initialDate: tasksProvider.selectedDate,
                     firstDate: DateTime.now(),
                     lastDate: DateTime.now().add(
                       const Duration(days: 365),
                     ),
                   );
-                  if (dateTime != null && dateTime != selectedDate) {
-                    selectedDate = dateTime;
+                  if (dateTime != null &&
+                      dateTime != tasksProvider.selectedDate) {
+                    tasksProvider.selectedDate = dateTime;
                   }
                   setState(() {});
                 },
                 child: Text(
                   style: headlineSmallTextTheme?.copyWith(fontSize: 16),
-                  dateFormat.format(selectedDate),
+                  dateFormat.format(tasksProvider.selectedDate),
                 ),
               ),
               const Spacer(),
@@ -128,7 +130,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
     TaskModel task = TaskModel(
       title: titleController.text,
       description: descriptionController.text,
-      date: selectedDate,
+      date: tasksProvider.selectedDate,
     );
     await FirebaseServices.addTaskToFireStore(task)
         .timeout(const Duration(milliseconds: 10), onTimeout: () {
