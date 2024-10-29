@@ -24,6 +24,8 @@ class SettingsProvider extends ChangeNotifier {
 
   get isDark => themeMode == ThemeMode.dark;
 
+  get isEnglish => languageCode == 'en';
+
   void changeThemeMode(ThemeMode selectedThemeMode) {
     if (themeMode == selectedThemeMode) return;
     themeMode = selectedThemeMode;

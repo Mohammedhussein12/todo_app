@@ -15,5 +15,8 @@
   "task_details": "تفاصيل المهمه",
   "enter_task_title": "أدخل عنوان المهمة",
   "enter_task_description": "أدخل وصف المهمه",
-  "done": "تم!"
+  "done": "تم!",
+  "task_added_successfully": "تم اضافة المهمة بنجاح!",
+  "task_updated_successfully": "تم تحديث المهمة بنجاح!",
+  "something_went_wrong": "حدث خطأ ما!"
 }

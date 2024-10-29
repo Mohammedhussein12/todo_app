@@ -25,12 +25,13 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
   final formKey = GlobalKey<FormState>();
   DateFormat dateFormat = DateFormat('yyyy-MM-dd');
   late TasksProvider tasksProvider;
+  late SettingsProvider settingsProvider;
 
   @override
   Widget build(BuildContext context) {
     final titleMediumTextTheme = Theme.of(context).textTheme.titleMedium;
     final headlineSmallTextTheme = Theme.of(context).textTheme.headlineSmall;
-    var settingsProvider = Provider.of<SettingsProvider>(context);
+    settingsProvider = Provider.of<SettingsProvider>(context);
     tasksProvider = Provider.of<TasksProvider>(context, listen: false);
 
     return Padding(
@@ -137,10 +138,12 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
       Provider.of<TasksProvider>(context, listen: false).getTasks();
       Navigator.pop(context);
       showToast(
-          msg: 'Task Added successfully!', backgroundColor: AppTheme.green);
+          msg: AppLocalizations.of(context)!.task_added_successfully,
+          backgroundColor: AppTheme.green);
     }).catchError((error) {
       showToast(
-          msg: 'oops! something went wrong', backgroundColor: AppTheme.red);
+          msg: AppLocalizations.of(context)!.something_went_wrong,
+          backgroundColor: AppTheme.red);
     });
   }
 }
