@@ -14,5 +14,6 @@
   "this_is_title": "This is title",
   "task_details": "Task details",
   "enter_task_title": "Enter task title",
-  "enter_task_description": "Enter task description"
+  "enter_task_description": "Enter task description",
+  "done": "Done!"
 }

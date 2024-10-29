@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_app/cache/cache_helper.dart';
 import 'package:todo_app/home_screen.dart';
 import 'package:todo_app/tabs/settings/settings_provider.dart';
+import 'package:todo_app/tabs/tasks/edit_task_screen.dart';
 import 'package:todo_app/tabs/tasks/tasks_provider.dart';
 import 'package:todo_app/utils/app_theme.dart';
 
@@ -46,6 +47,7 @@ class TodoApp extends StatelessWidget {
       initialRoute: HomeScreen.routeName,
       routes: {
         HomeScreen.routeName: (context) => const HomeScreen(),
+        EditTaskScreen.routeName: (context) => const EditTaskScreen(),
       },
     );
   }

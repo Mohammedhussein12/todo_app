@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/firebase_services/firebase_services.dart';
@@ -9,6 +8,7 @@ import 'package:todo_app/tabs/tasks/tasks_provider.dart';
 import 'package:todo_app/widgets/default_elevated_button.dart';
 import 'package:todo_app/widgets/default_text_form_field.dart';
 
+import '../../helper_methods/show_toast.dart';
 import '../../models/task_model.dart';
 import '../../utils/app_theme.dart';
 
@@ -134,21 +134,11 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
         .timeout(const Duration(microseconds: 100), onTimeout: () {
       Provider.of<TasksProvider>(context, listen: false).getTasks();
       Navigator.pop(context);
-      Fluttertoast.showToast(
-        msg: "Task added successfully!",
-        toastLength: Toast.LENGTH_LONG,
-        timeInSecForIosWeb: 5,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: AppTheme.green,
-      );
+      showToast(
+          msg: 'Task updated successfully!', backgroundColor: AppTheme.green);
     }).catchError((error) {
-      Fluttertoast.showToast(
-        msg: "Oops! Something went wrong. Please try again.",
-        toastLength: Toast.LENGTH_LONG,
-        timeInSecForIosWeb: 5,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: AppTheme.red,
-      );
+      showToast(
+          msg: 'oops! Something went wrong.', backgroundColor: AppTheme.red);
     });
   }
 }
