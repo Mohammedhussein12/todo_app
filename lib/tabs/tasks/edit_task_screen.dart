@@ -164,11 +164,13 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                                 tasksProvider.getTasks();
                                 Navigator.pop(context);
                                 showToast(
-                                    msg: 'Task Updated successfully!',
+                                    msg: AppLocalizations.of(context)!
+                                        .task_updated_successfully,
                                     backgroundColor: AppTheme.green);
                               }).catchError((error) {
                                 showToast(
-                                    msg: 'Oops! something went wrong',
+                                    msg: AppLocalizations.of(context)!
+                                        .something_went_wrong,
                                     backgroundColor: AppTheme.red);
                               });
                             }

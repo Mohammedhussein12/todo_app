@@ -37,6 +37,18 @@ class DefaultTextFormField extends StatelessWidget {
       validator: validator,
       controller: controller,
       decoration: InputDecoration(
+        border: const UnderlineInputBorder(
+          borderSide: BorderSide(color: AppTheme.primary),
+        ),
+        enabledBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: AppTheme.primary),
+        ),
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: AppTheme.green),
+        ),
+        errorBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: AppTheme.red),
+        ),
         hintText: hintText,
         hintStyle: Theme.of(context).textTheme.titleMedium,
       ),
