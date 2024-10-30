@@ -11,4 +11,5 @@ Future<bool?> showToast(
     gravity: ToastGravity.BOTTOM,
     backgroundColor: backgroundColor,
   );
+  return null;
 }

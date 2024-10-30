@@ -75,12 +75,12 @@ class _SettingsTabState extends State<SettingsTab> {
             flex: 5,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
+            padding: const EdgeInsetsDirectional.symmetric(horizontal: 12),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Logout',
+                  AppLocalizations.of(context)!.logout,
                   style: textTheme.titleMedium,
                 ),
                 IconButton(
