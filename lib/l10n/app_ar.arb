@@ -19,5 +19,15 @@
   "task_added_successfully": "تم اضافة المهمة بنجاح!",
   "task_updated_successfully": "تم تحديث المهمة بنجاح!",
   "something_went_wrong": "حدث خطأ ما!",
+  "login": "تسجيل الدخول",
+  "email": "البريد الالكترونى",
+  "name": "الاسم",
+  "password": "كلمه المرور",
+  "register": "انشاء حساب",
+  "not_have_an_account": "ليس لديك حساب ؟",
+  "already_have_an_account": "لديك حساب بالفعل ؟",
+  "name_cannot_be_less_than_2_characters": "الاسم لا يمكن ان يكون اقل من 2 حروف",
+  "email_cannot_be_less_than_5_characters": "البريد الالكترونى لا يمكن ان يكون اقل من 5 حروف",
+  "password_cannot_be_less_than_8_characters": "كلمه المرور لا يمكن ان تكون اقل من 8 حروف",
   "logout": "تسجيل خروج"
 }

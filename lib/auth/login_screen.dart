@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todo_app/auth/register_screen.dart';
 import 'package:todo_app/widgets/default_text_form_field.dart';
 
@@ -24,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final screenWidth = MediaQuery.sizeOf(context).width;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: Text(AppLocalizations.of(context)!.login),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
@@ -36,12 +37,13 @@ class _LoginScreenState extends State<LoginScreen> {
               DefaultTextFormField(
                 validator: (value) {
                   if (value == null || value.trim().length < 5) {
-                    return 'Email cannot be less than 5 characters ';
+                    return AppLocalizations.of(context)!
+                        .name_cannot_be_less_than_2_characters;
                   }
                   return null;
                 },
                 keyboardType: TextInputType.emailAddress,
-                hintText: 'Email',
+                hintText: AppLocalizations.of(context)!.email,
                 controller: _emailController,
               ),
               SizedBox(
@@ -51,19 +53,20 @@ class _LoginScreenState extends State<LoginScreen> {
                 isPassword: true,
                 validator: (value) {
                   if (value == null || value.trim().length < 8) {
-                    return 'Password cannot be less than 8 characters ';
+                    return AppLocalizations.of(context)!
+                        .password_cannot_be_less_than_8_characters;
                   }
                   return null;
                 },
                 keyboardType: TextInputType.visiblePassword,
-                hintText: 'Password',
+                hintText: AppLocalizations.of(context)!.password,
                 controller: _passwordController,
               ),
               SizedBox(
                 height: screenHeight * 0.05,
               ),
               DefaultElevatedButton(
-                label: 'Login',
+                label: AppLocalizations.of(context)!.login,
                 onPressed: login,
               ),
               SizedBox(
@@ -74,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Navigator.pushReplacementNamed(
                       context, RegisterScreen.routeName);
                 },
-                child: const Text("Don't have an account ?"),
+                child: Text(AppLocalizations.of(context)!.register),
               )
             ],
           ),
