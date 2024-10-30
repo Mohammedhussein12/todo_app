@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todo_app/auth/login_screen.dart';
 import 'package:todo_app/widgets/default_text_form_field.dart';
 
@@ -25,7 +26,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final screenWidth = MediaQuery.sizeOf(context).width;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Register'),
+        title: Text(AppLocalizations.of(context)!.register),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
@@ -37,12 +38,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
               DefaultTextFormField(
                 validator: (value) {
                   if (value == null || value.trim().length < 5) {
-                    return 'Name cannot be less than 2 characters ';
+                    return AppLocalizations.of(context)!
+                        .name_cannot_be_less_than_2_characters;
                   }
                   return null;
                 },
                 keyboardType: TextInputType.text,
-                hintText: 'Name',
+                hintText: AppLocalizations.of(context)!.name,
                 controller: _nameController,
               ),
               SizedBox(
@@ -51,12 +53,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
               DefaultTextFormField(
                 validator: (value) {
                   if (value == null || value.trim().length < 5) {
-                    return 'Email cannot be less than 5 characters ';
+                    return AppLocalizations.of(context)!
+                        .email_cannot_be_less_than_5_characters;
                   }
                   return null;
                 },
                 keyboardType: TextInputType.emailAddress,
-                hintText: 'Email',
+                hintText: AppLocalizations.of(context)!.email,
                 controller: _emailController,
               ),
               SizedBox(
@@ -66,19 +69,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 isPassword: true,
                 validator: (value) {
                   if (value == null || value.trim().length < 8) {
-                    return 'Password cannot be less than 8 characters ';
+                    return AppLocalizations.of(context)!
+                        .password_cannot_be_less_than_8_characters;
                   }
                   return null;
                 },
                 keyboardType: TextInputType.visiblePassword,
-                hintText: 'Password',
+                hintText: AppLocalizations.of(context)!.password,
                 controller: _passwordController,
               ),
               SizedBox(
                 height: screenHeight * 0.05,
               ),
               DefaultElevatedButton(
-                label: 'Register',
+                label: AppLocalizations.of(context)!.register,
                 onPressed: register,
               ),
               SizedBox(
@@ -89,7 +93,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Navigator.pushReplacementNamed(
                       context, LoginScreen.routeName);
                 },
-                child: const Text("Already have an account ?"),
+                child:
+                    Text(AppLocalizations.of(context)!.already_have_an_account),
               )
             ],
           ),
