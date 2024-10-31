@@ -66,7 +66,9 @@ class AppTheme {
       style: TextButton.styleFrom(foregroundColor: primary),
     ),
     appBarTheme: const AppBarTheme(
-        centerTitle: true, backgroundColor: Colors.transparent),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        foregroundColor: white),
     primaryColor: primary,
     scaffoldBackgroundColor: backgroundDark,
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(

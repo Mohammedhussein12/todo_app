@@ -2,6 +2,7 @@ import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/auth/user_provider.dart';
 import 'package:todo_app/tabs/tasks/task_item.dart';
 import 'package:todo_app/tabs/tasks/tasks_provider.dart';
 
@@ -24,8 +25,11 @@ class _TasksTabState extends State<TasksTab> {
     var provider = Provider.of<SettingsProvider>(context);
     final textTheme = Theme.of(context).textTheme;
     TasksProvider tasksProvider = Provider.of<TasksProvider>(context);
+    String userId =
+        Provider.of<UserProvider>(context, listen: false).currentUser!.id;
+
     if (shouldGetTasks) {
-      tasksProvider.getTasks();
+      tasksProvider.getTasks(userId);
       shouldGetTasks = false;
     }
     return Scaffold(
@@ -52,7 +56,7 @@ class _TasksTabState extends State<TasksTab> {
                 padding: EdgeInsetsDirectional.only(top: screenHeight * 0.155),
                 child: EasyInfiniteDateTimeLine(
                   onDateChange: (selectedDate) {
-                    tasksProvider.getSelectedDateTasks(selectedDate);
+                    tasksProvider.getSelectedDateTasks(selectedDate, userId);
                   },
                   locale: provider.languageCode,
                   dayProps: EasyDayProps(

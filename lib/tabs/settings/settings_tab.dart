@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/auth/login_screen.dart';
+import 'package:todo_app/auth/user_provider.dart';
+import 'package:todo_app/firebase_services/firebase_services.dart';
 import 'package:todo_app/tabs/settings/language.dart';
 import 'package:todo_app/tabs/settings/settings_provider.dart';
 import 'package:todo_app/tabs/settings/theme_drop_down_menu_item.dart';
+import 'package:todo_app/tabs/tasks/tasks_provider.dart';
 
 import '../../utils/app_theme.dart';
 import 'language_drop_down_menu_button.dart';
@@ -84,7 +88,15 @@ class _SettingsTabState extends State<SettingsTab> {
                   style: textTheme.titleMedium,
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    FirebaseServices.logout();
+                    Provider.of<TasksProvider>(context, listen: false)
+                        .resetData();
+                    Navigator.of(context)
+                        .pushReplacementNamed(LoginScreen.routeName);
+                    Provider.of<UserProvider>(context, listen: false)
+                        .updateUser(null);
+                  },
                   icon: const Icon(
                     Icons.logout,
                     color: AppTheme.primary,
