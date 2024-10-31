@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TaskModel {
+  static String collectionName = 'tasks';
   String id;
   String title;
   String description;
@@ -26,10 +27,10 @@ class TaskModel {
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'title': title,
-        'description': description,
-        'date': Timestamp.fromDate(date),
-        'isDone': isDone
-      };
+    'id': id,
+    'title': title,
+    'description': description,
+    'date': Timestamp.fromDate(date),
+    'isDone': isDone
+  };
 }

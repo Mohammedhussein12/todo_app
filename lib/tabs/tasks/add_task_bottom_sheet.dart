@@ -9,6 +9,7 @@ import 'package:todo_app/tabs/tasks/tasks_provider.dart';
 import 'package:todo_app/widgets/default_elevated_button.dart';
 import 'package:todo_app/widgets/default_text_form_field.dart';
 
+import '../../auth/user_provider.dart';
 import '../../models/task_model.dart';
 import '../../utils/app_theme.dart';
 
@@ -33,6 +34,8 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
     final headlineSmallTextTheme = Theme.of(context).textTheme.headlineSmall;
     settingsProvider = Provider.of<SettingsProvider>(context);
     tasksProvider = Provider.of<TasksProvider>(context, listen: false);
+    String userId =
+        Provider.of<UserProvider>(context, listen: false).currentUser!.id;
 
     return Padding(
       padding:
@@ -128,19 +131,22 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
   }
 
   addTask() async {
+    String userId =
+        Provider.of<UserProvider>(context, listen: false).currentUser!.id;
     TaskModel task = TaskModel(
       title: titleController.text,
       description: descriptionController.text,
       date: tasksProvider.selectedDate,
     );
-    await FirebaseServices.addTaskToFireStore(task)
-        .timeout(const Duration(milliseconds: 10), onTimeout: () {
-      Provider.of<TasksProvider>(context, listen: false).getTasks();
-      Navigator.pop(context);
-      showToast(
-          msg: AppLocalizations.of(context)!.task_added_successfully,
-          backgroundColor: AppTheme.green);
-    }).catchError((error) {
+    await FirebaseServices.addTaskToFireStore(task, userId).then(
+      (_) {
+        Provider.of<TasksProvider>(context, listen: false).getTasks(userId);
+        Navigator.pop(context);
+        showToast(
+            msg: AppLocalizations.of(context)!.task_added_successfully,
+            backgroundColor: AppTheme.green);
+      },
+    ).catchError((error) {
       showToast(
           msg: AppLocalizations.of(context)!.something_went_wrong,
           backgroundColor: AppTheme.red);
