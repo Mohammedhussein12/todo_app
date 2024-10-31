@@ -34,7 +34,8 @@ class ThemeModeDropDownMenu extends StatelessWidget {
         child: DropdownButton(
           iconDisabledColor: AppTheme.primary,
           iconEnabledColor: AppTheme.primary,
-          dropdownColor: AppTheme.white,
+          dropdownColor:
+              provider.isDark ? AppTheme.backgroundDark : AppTheme.white,
           value: provider.themeMode,
           style: textTheme.headlineSmall
               ?.copyWith(color: AppTheme.primary, fontSize: 14),
