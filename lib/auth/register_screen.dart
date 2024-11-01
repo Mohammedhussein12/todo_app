@@ -39,71 +39,72 @@ class _RegisterScreenState extends State<RegisterScreen> {
         padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
         child: Form(
           key: formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              DefaultTextFormField(
-                validator: (value) {
-                  if (value == null || value.trim().length < 5) {
-                    return AppLocalizations.of(context)!
-                        .name_cannot_be_less_than_2_characters;
-                  }
-                  return null;
-                },
-                keyboardType: TextInputType.text,
-                hintText: AppLocalizations.of(context)!.name,
-                controller: _nameController,
-              ),
-              SizedBox(
-                height: screenHeight * 0.02,
-              ),
-              DefaultTextFormField(
-                validator: (value) {
-                  if (value == null || value.trim().length < 5) {
-                    return AppLocalizations.of(context)!
-                        .email_cannot_be_less_than_5_characters;
-                  }
-                  return null;
-                },
-                keyboardType: TextInputType.emailAddress,
-                hintText: AppLocalizations.of(context)!.email,
-                controller: _emailController,
-              ),
-              SizedBox(
-                height: screenHeight * 0.02,
-              ),
-              DefaultTextFormField(
-                isPassword: true,
-                validator: (value) {
-                  if (value == null || value.trim().length < 8) {
-                    return AppLocalizations.of(context)!
-                        .password_cannot_be_less_than_8_characters;
-                  }
-                  return null;
-                },
-                keyboardType: TextInputType.visiblePassword,
-                hintText: AppLocalizations.of(context)!.password,
-                controller: _passwordController,
-              ),
-              SizedBox(
-                height: screenHeight * 0.05,
-              ),
-              DefaultElevatedButton(
-                label: AppLocalizations.of(context)!.register,
-                onPressed: register,
-              ),
-              SizedBox(
-                height: screenHeight * 0.02,
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pushReplacementNamed(
-                      context, LoginScreen.routeName);
-                },
-                child:
-                Text(AppLocalizations.of(context)!.already_have_an_account),
-              )
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: screenHeight * 0.17,
+                ),
+                DefaultTextFormField(
+                  validator: (value) {
+                    if (value == null || value.trim().length < 5) {
+                      return AppLocalizations.of(context)!
+                          .name_cannot_be_less_than_2_characters;
+                    }
+                    return null;
+                  },
+                  keyboardType: TextInputType.text,
+                  hintText: AppLocalizations.of(context)!.name,
+                  controller: _nameController,
+                ),
+                SizedBox(
+                  height: screenHeight * 0.02,
+                ),
+                DefaultTextFormField(
+                  validator: (value) {
+                    if (value == null || value.trim().length < 5) {
+                      return AppLocalizations.of(context)!
+                          .email_cannot_be_less_than_5_characters;
+                    }
+                    return null;
+                  },
+                  keyboardType: TextInputType.emailAddress,
+                  hintText: AppLocalizations.of(context)!.email,
+                  controller: _emailController,
+                ),
+                SizedBox(
+                  height: screenHeight * 0.02,
+                ),
+                DefaultTextFormField(
+                  isPassword: true,
+                  validator: (value) {
+                    if (value == null || value.trim().length < 8) {
+                      return AppLocalizations.of(context)!
+                          .password_cannot_be_less_than_8_characters;
+                    }
+                    return null;
+                  },
+                  keyboardType: TextInputType.visiblePassword,
+                  hintText: AppLocalizations.of(context)!.password,
+                  controller: _passwordController,
+                ),
+                SizedBox(
+                  height: screenHeight * 0.04,
+                ),
+                DefaultElevatedButton(
+                  label: AppLocalizations.of(context)!.register,
+                  onPressed: register,
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(
+                        context, LoginScreen.routeName);
+                  },
+                  child: Text(
+                      AppLocalizations.of(context)!.already_have_an_account),
+                )
+              ],
+            ),
           ),
         ),
       ),
