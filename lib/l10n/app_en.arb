@@ -29,5 +29,7 @@
   "name_cannot_be_less_than_2_characters": "Name cannot be less than 2 characters",
   "email_cannot_be_less_than_5_characters": "Email cannot be less than 5 characters",
   "password_cannot_be_less_than_8_characters": "Password cannot be less than 8 characters",
-  "logout": "Logout"
+  "logout": "Logout",
+  "title_cannot_be_empty": "Title cannot be empty",
+  "description_cannot_be_empty": "Description cannot be empty"
 }

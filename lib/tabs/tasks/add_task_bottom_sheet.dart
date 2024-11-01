@@ -63,7 +63,8 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
               DefaultTextFormField(
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Title cannot be empty';
+                      return AppLocalizations.of(context)!
+                          .title_cannot_be_empty;
                     }
                     return null;
                   },
@@ -75,7 +76,8 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
               DefaultTextFormField(
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Description cannot be empty';
+                      return AppLocalizations.of(context)!
+                          .description_cannot_be_empty;
                     }
                     return null;
                   },
