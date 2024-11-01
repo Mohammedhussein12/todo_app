@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 validator: (value) {
                   if (value == null || value.trim().length < 5) {
                     return AppLocalizations.of(context)!
-                        .name_cannot_be_less_than_2_characters;
+                        .email_cannot_be_less_than_5_characters;
                   }
                   return null;
                 },
