@@ -35,9 +35,11 @@ class TaskItem extends StatelessWidget {
         ),
         child: Slidable(
           startActionPane: ActionPane(
+            extentRatio: 0.7,
             motion: const ScrollMotion(),
             children: [
               SlidableAction(
+                label: 'Delete',
                 backgroundColor: AppTheme.red,
                 foregroundColor: AppTheme.white,
                 icon: Icons.delete,
@@ -58,6 +60,7 @@ class TaskItem extends StatelessWidget {
                 },
               ),
               SlidableAction(
+                label: 'Edit',
                 backgroundColor: AppTheme.primary,
                 foregroundColor: AppTheme.white,
                 icon: Icons.edit,
