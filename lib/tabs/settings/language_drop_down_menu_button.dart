@@ -37,7 +37,8 @@ class LanguageDropDownMenu extends StatelessWidget {
         child: DropdownButton<Language>(
           iconDisabledColor: AppTheme.primary,
           iconEnabledColor: AppTheme.primary,
-          dropdownColor: AppTheme.white,
+          dropdownColor:
+              provider.isDark ? AppTheme.backgroundDark : AppTheme.white,
           value: languages.firstWhere(
             (language) {
               return language.code == provider.languageCode;

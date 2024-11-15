@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/auth/user_provider.dart';
 import 'package:todo_app/firebase_services/firebase_services.dart';
 import 'package:todo_app/models/task_model.dart';
 import 'package:todo_app/tabs/tasks/tasks_provider.dart';
@@ -21,6 +22,8 @@ class TaskItem extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     var settingsProvider = Provider.of<SettingsProvider>(context);
     var tasksProvider = Provider.of<TasksProvider>(context, listen: false);
+    String userId =
+        Provider.of<UserProvider>(context, listen: false).currentUser!.id;
 
     return Container(
       margin:
@@ -32,17 +35,19 @@ class TaskItem extends StatelessWidget {
         ),
         child: Slidable(
           startActionPane: ActionPane(
+            extentRatio: 0.7,
             motion: const ScrollMotion(),
             children: [
               SlidableAction(
+                label: 'Delete',
                 backgroundColor: AppTheme.red,
                 foregroundColor: AppTheme.white,
                 icon: Icons.delete,
                 onPressed: (context) async {
-                  await FirebaseServices.deleteTaskFromFireStore(task.id)
-                      .timeout(const Duration(microseconds: 100),
-                          onTimeout: () {
-                    tasksProvider.getTasks();
+                  await FirebaseServices.deleteTaskFromFireStore(
+                          task.id, userId)
+                      .then((_) {
+                    tasksProvider.getTasks(userId);
                   }).catchError(() {
                     Fluttertoast.showToast(
                       msg: 'Oops! something went wrong',
@@ -55,6 +60,7 @@ class TaskItem extends StatelessWidget {
                 },
               ),
               SlidableAction(
+                label: 'Edit',
                 backgroundColor: AppTheme.primary,
                 foregroundColor: AppTheme.white,
                 icon: Icons.edit,
@@ -114,11 +120,11 @@ class TaskItem extends StatelessWidget {
                   onTap: () async {
                     task.isDone = !task.isDone;
                     await FirebaseServices.updateTaskStatus(
-                            task.id, task.isDone)
+                            task.id, task.isDone, userId)
                         .timeout(
                       const Duration(milliseconds: 10),
                       onTimeout: () {
-                        tasksProvider.getTasks();
+                        tasksProvider.getTasks(userId);
                         print(task.isDone);
                       },
                     );

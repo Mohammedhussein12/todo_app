@@ -18,5 +18,18 @@
   "done": "Done!",
   "task_added_successfully": "Task Added successfully!",
   "task_updated_successfully": "Task Updated successfully!",
-  "something_went_wrong": "oops! something went wrong"
+  "something_went_wrong": "oops! something went wrong",
+  "login": "Login",
+  "email": "Email",
+  "name": "Name",
+  "password": "Password",
+  "register": "Register",
+  "not_have_an_account": "Don't have an account ?",
+  "already_have_an_account": "Already have an account ?",
+  "name_cannot_be_less_than_2_characters": "Name cannot be less than 2 characters",
+  "email_cannot_be_less_than_5_characters": "Email cannot be less than 5 characters",
+  "password_cannot_be_less_than_8_characters": "Password cannot be less than 8 characters",
+  "logout": "Logout",
+  "title_cannot_be_empty": "Title cannot be empty",
+  "description_cannot_be_empty": "Description cannot be empty"
 }

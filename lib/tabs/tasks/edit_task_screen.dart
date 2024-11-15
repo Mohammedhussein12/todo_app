@@ -7,6 +7,7 @@ import 'package:todo_app/helper_methods/show_toast.dart';
 import 'package:todo_app/tabs/tasks/tasks_provider.dart';
 import 'package:todo_app/widgets/default_text_form_field.dart';
 
+import '../../auth/user_provider.dart';
 import '../../models/task_model.dart';
 import '../../utils/app_theme.dart';
 import '../../widgets/default_elevated_button.dart';
@@ -32,6 +33,8 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
     final screenWidth = MediaQuery.sizeOf(context).width;
     final settingsProvider = Provider.of<SettingsProvider>(context);
     final tasksProvider = Provider.of<TasksProvider>(context, listen: false);
+    String userId =
+        Provider.of<UserProvider>(context, listen: false).currentUser!.id;
 
     return Scaffold(
       appBar: AppBar(
@@ -158,10 +161,10 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                       DefaultElevatedButton(
                           onPressed: () async {
                             if (formKey.currentState!.validate()) {
-                              await FirebaseServices.updateTaskToFireStore(task)
-                                  .timeout(const Duration(milliseconds: 10),
-                                      onTimeout: () {
-                                tasksProvider.getTasks();
+                              await FirebaseServices.updateTaskToFireStore(
+                                      task, userId)
+                                  .then((_) {
+                                tasksProvider.getTasks(userId);
                                 Navigator.pop(context);
                                 showToast(
                                     msg: AppLocalizations.of(context)!

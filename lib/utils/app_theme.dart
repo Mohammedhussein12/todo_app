@@ -12,6 +12,11 @@ class AppTheme {
   static const Color green = Color(0xff61E757);
   static const Color grey = Color(0xffC8C9CB);
   static final ThemeData lightTheme = ThemeData(
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(foregroundColor: primary),
+    ),
+    appBarTheme: const AppBarTheme(
+        centerTitle: true, backgroundColor: Colors.transparent),
     primaryColor: primary,
     scaffoldBackgroundColor: backgroundLight,
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -57,6 +62,13 @@ class AppTheme {
     ),
   );
   static final ThemeData darkTheme = ThemeData(
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(foregroundColor: primary),
+    ),
+    appBarTheme: const AppBarTheme(
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        foregroundColor: white),
     primaryColor: primary,
     scaffoldBackgroundColor: backgroundDark,
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
