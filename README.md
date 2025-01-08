@@ -32,7 +32,7 @@ To run this project locally, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Mohammedhussein12/top_news_app.git
+   git clone https://github.com/Mohammedhussein12/todo_app.git
    cd todo-list-app
    ```
 
