@@ -6,9 +6,10 @@
 2. [🛠 Installation & Setup](#-installation--setup)
 3. [🤝 Contribution Guide](#-contribution-guide)
 4. [🖥️ Technical Stack](#️-technical-stack)
-5. [🛠 Features](#-features)
-6. [📷 Screenshots](#-screenshots)
-7. [👥 Contributors](#-contributors)
+5. [🎥 Demo Video](#-demo-video)
+6. [🛠 Features](#-features)
+7. [📷 Screenshots](#-screenshots)
+8. [👥 Contributors](#-contributors)
 
 ## 🚀 Introduction
 
@@ -94,6 +95,13 @@ We welcome contributions! Here's how you can help:
 ### **Utilities**
 
 - **Fluttertoast**: Toast message notifications
+
+## 🎥 Demo Video
+
+Watch the demo video to see the application in action:
+*
+*[Demo Video Link](https://drive.google.com/file/d/1qM-uyNBN7rO5kNA-NGCgiwH1XOD9QEO7/view?usp=drive_link)
+**
 
 ## 🛠 Features
 
